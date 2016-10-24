@@ -1,0 +1,62 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Jan 19, 2010 4:08:57 PM by Hibernate Tools 3.2.5.Beta -->
+<hibernate-mapping>
+    <class name="com.mkyong.common.Member" table="member" catalog="mkyongdb">
+        <id name="memberId" type="java.lang.Long">
+            <column name="MEMBER_ID" />
+            <generator class="identity" />
+        </id>
+        <discriminator column="MEMBER_TYPE" type="java.lang.String"/>
+        <property name="userName" type="java.lang.String">
+            <column name="teacher_name" length="20" not-null="true" />
+        </property>
+
+        <property name="collegeName" type="java.lang.String" column="college_name" length="100"/>
+
+        <property name="email" type="java.lang.String" column="email" length="100" not-null="true"/>
+
+        <property name="emailVerify" type="java.lang.Boolean" column="email_verify"/>
+
+        <subclass name="com.mkyong.common.Person" discriminator-value="PERSON">
+            <set name="courseTests" table="course_test"
+                 inverse="true" lazy="true" fetch="select">
+                <key>
+                    <column name="person_id" not-null="true" />
+                </key>
+                <one-to-many class="com.mkyong.common.CourseTest" />
+            </set>
+            <join table="Person">
+                <key column="person_id"/>
+                <property name="alias" column="alias"/>
+            </join>
+        </subclass>
+
+    </class>
+
+    <class name="com.mkyong.common.CourseTest" table="course_test"
+           catalog="mkyongdb">
+        <id name="courseId" type="java.lang.Long">
+            <column name="COURSE_ID" />
+            <generator class="identity" />
+        </id>
+
+        <many-to-one name="person" class="com.mkyong.common.Person" fetch="select">
+            <column name="person_id" not-null="true" />
+        </many-to-one>
+
+        <property name="courseName" type="java.lang.String">
+            <column name="course_name" length="20" not-null="true" />
+        </property>
+
+        <property name="courseDescription" type="java.lang.String">
+            <column name="course_description" length="1000" not-null="false" />
+        </property>
+
+    </class>
+
+
+
+
+</hibernate-mapping>
