@@ -3,47 +3,51 @@
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <!-- Generated Jan 19, 2010 4:08:57 PM by Hibernate Tools 3.2.5.Beta -->
 <hibernate-mapping>
-    <class name="com.mkyong.common.Member" table="member" catalog="mkyongdb">
-        <id name="memberId" type="java.lang.Long">
-            <column name="MEMBER_ID" />
+    <class name="com.mkyong.models.Person" table="person" catalog="mkyongdb">
+
+        <id name="personId" type="java.lang.Long">
+            <column name="person_id" />
             <generator class="identity" />
         </id>
-        <discriminator column="MEMBER_TYPE" type="java.lang.String"/>
+
+        <discriminator column="person_type" type="java.lang.String"/>
+
         <property name="personName" type="java.lang.String">
-            <column name="teacher_name" length="20" not-null="true" />
+            <column name="person_name" length="20" not-null="true" />
         </property>
 
         <property name="collegeName" type="java.lang.String" column="college_name" length="100"/>
 
-        <property name="email" type="java.lang.String" column="email" length="100" not-null="true"/>
+        <property name="email" type="java.lang.String" column="EMAIL" length="100" not-null="true"/>
 
         <property name="emailVerify" type="java.lang.Boolean" column="email_verify"/>
 
-        <subclass name="com.mkyong.common.Person" discriminator-value="PERSON">
-            <set name="courseTests" table="course_test"
+        <subclass name="com.mkyong.models.Teacher" discriminator-value="teacher">
+            <set name="courses" table="course"
                  inverse="true" lazy="true" fetch="select">
                 <key>
-                    <column name="person_id" not-null="true" />
+                    <column name="teacher_id" not-null="true" />
                 </key>
-                <one-to-many class="com.mkyong.common.CourseTest" />
+                <one-to-many class="com.mkyong.models.Course" />
             </set>
-            <join table="Person">
-                <key column="person_id"/>
+            <join table="teacher">
+                <key column="teacher_id"/>
                 <property name="alias" column="alias"/>
             </join>
+
         </subclass>
 
     </class>
 
-    <class name="com.mkyong.common.CourseTest" table="course_test"
-           catalog="mkyongdb">
+    <class name="com.mkyong.models.Course" table="course" catalog="mkyongdb">
+
         <id name="courseId" type="java.lang.Long">
-            <column name="COURSE_ID" />
+            <column name="course_id" />
             <generator class="identity" />
         </id>
 
-        <many-to-one name="person" class="com.mkyong.common.Person" fetch="select">
-            <column name="person_id" not-null="true" />
+        <many-to-one name="teacher" class="com.mkyong.models.Teacher" fetch="select">
+            <column name="teacher_id" not-null="true" />
         </many-to-one>
 
         <property name="courseName" type="java.lang.String">

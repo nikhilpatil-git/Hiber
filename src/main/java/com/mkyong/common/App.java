@@ -1,5 +1,8 @@
 package com.mkyong.common;
 
+import com.mkyong.models.Course;
+import com.mkyong.models.Person;
+import com.mkyong.models.Teacher;
 import com.mkyong.persistence.HibernateUtil;
 import org.hibernate.Session;
 
@@ -12,24 +15,24 @@ public class App
         
         session.beginTransaction();
 
-        Person teacher = new Person();
-        teacher.setUserName("Nikhil");
+        com.mkyong.models.Teacher teacher = new Teacher();
+        teacher.setPersonName("Nikhil");
         teacher.setEmail("patilnikhil9@gmail.com");
         teacher.setCollegeName("DIT");
         teacher.setEmailVerify(true);
-        teacher.setAlias("Jhonnny");
+        teacher.setAlias("Mike");
 
         session.save(teacher);
 
-        CourseTest course1 = new CourseTest();
+        Course course1 = new Course();
         course1.setCourseName("Physics");
         course1.setCourseDescription("this will take you another dimension");
-        course1.setPerson(teacher);
+        course1.setTeacher(teacher);
 
-        teacher.getCourseTests().add(course1);
+        teacher.getCourses().add(course1);
 
         session.save(course1);
-        
+
 /*        try{
 
             Teacher teacher = new Teacher();
@@ -78,7 +81,7 @@ public class App
             for (Iterator iterator = list.iterator(); iterator.hasNext();){
 
                 Teacher teacher = (Teacher) iterator.next();
-                System.out.print("First Name: " + teacher.getUserName());
+                System.out.print("First Name: " + teacher.getPersonName());
                 System.out.print("First Name: " + teacher.getEmail());
                 System.out.print("First Name: " + teacher.getCollegeName());
                 System.out.print("First Name: " + teacher.getAlias());
@@ -90,7 +93,7 @@ public class App
             for (Iterator iterator = list.iterator(); iterator.hasNext();){
 
                 Student teacher = (Student) iterator.next();
-                System.out.print("First Name: " + teacher.getUserName());
+                System.out.print("First Name: " + teacher.getPersonName());
                 System.out.print("First Name: " + teacher.getEmail());
                 System.out.print("First Name: " + teacher.getCollegeName());
                 System.out.print("First Name: " + teacher.getFacebookId());
