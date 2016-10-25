@@ -1,10 +1,11 @@
 package com.mkyong.common;
 
-import com.mkyong.models.Course;
-import com.mkyong.models.Person;
-import com.mkyong.models.Teacher;
+import com.mkyong.models.Assignment;
 import com.mkyong.persistence.HibernateUtil;
 import org.hibernate.Session;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class App 
 {
@@ -15,7 +16,7 @@ public class App
         
         session.beginTransaction();
 
-        com.mkyong.models.Teacher teacher = new Teacher();
+/*        com.mkyong.models.Teacher teacher = new Teacher();
         teacher.setPersonName("Nikhil");
         teacher.setEmail("patilnikhil9@gmail.com");
         teacher.setCollegeName("DIT");
@@ -31,7 +32,27 @@ public class App
 
         teacher.getCourses().add(course1);
 
-        session.save(course1);
+        session.save(course1);*/
+
+        Date startDate = new Date();
+        Date endDate = new Date();
+
+        SimpleDateFormat simpleDateFormat1 = new SimpleDateFormat("25/10/2016");
+        simpleDateFormat1.format(startDate);
+
+        SimpleDateFormat simpleDateFormat2 = new SimpleDateFormat("25/10/2016");
+        simpleDateFormat2.format(endDate);
+
+
+        Assignment assignment = new Assignment();
+        assignment.setTitle("Physics Assignment");
+        assignment.setDescription("this is god");
+        assignment.setStartDate(startDate);
+        assignment.setEndDate(endDate);
+        assignment.setNumberOfDays(7);
+        assignment.setMarksPerQuestion(10);
+
+        session.save(assignment);
 
 /*        try{
 
