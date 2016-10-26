@@ -1,0 +1,62 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Jan 19, 2010 4:08:57 PM by Hibernate Tools 3.2.5.Beta -->
+<hibernate-mapping>
+    <class name="com.edubot.entities.Person" table="person" catalog="mkyongdb">
+
+        <id name="personId" type="java.lang.Long">
+            <column name="person_id" />
+            <generator class="identity" />
+        </id>
+
+        <discriminator column="person_type" type="java.lang.String"/>
+
+        <property name="name" type="java.lang.String">
+            <column name="name" length="20" not-null="true" />
+        </property>
+
+        <property name="collegeName" type="java.lang.String" column="college_name" length="100"/>
+
+        <property name="email" type="java.lang.String" column="EMAIL" length="100" not-null="true"/>
+
+        <property name="emailVerify" type="java.lang.Boolean" column="email_verify"/>
+
+        <subclass name="com.edubot.entities.Teacher" discriminator-value="TEACHER">
+            <set name="courses" table="course"
+                 inverse="true" lazy="true" fetch="select">
+                <key>
+                    <column name="teacher_id" not-null="true" />
+                </key>
+                <one-to-many class="com.edubot.entities.Course" />
+            </set>
+            <join table="teacher">
+                <key column="teacher_id"/>
+                <property name="alias" column="alias"/>
+            </join>
+
+        </subclass>
+
+        <subclass name="com.edubot.entities.Student" discriminator-value="STUDENT">
+
+            <set name="courses" table="student_course_join"
+                 inverse="false" lazy="true" fetch="select" cascade="all">
+                <key>
+                    <column name="student_id" not-null="true" />
+                </key>
+                <many-to-many entity-name="com.edubot.entities.Course">
+                    <column name="course_id" not-null="true" />
+                </many-to-many>
+            </set>
+
+            <join table="student">
+                <key column="student_id"/>
+                <property name="facebookId" type="java.lang.Long" column="facebook_id"/>
+                <property name="pageId" type="java.lang.Long" column="page_id"/>
+            </join>
+
+        </subclass>
+
+    </class>
+
+</hibernate-mapping>

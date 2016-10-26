@@ -1,0 +1,46 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Jan 19, 2010 4:08:57 PM by Hibernate Tools 3.2.5.Beta -->
+<hibernate-mapping>
+
+    <class name="com.edubot.entities.Course" table="course" catalog="mkyongdb">
+
+        <id name="courseId" type="java.lang.Long">
+            <column name="course_id" />
+            <generator class="identity" />
+        </id>
+
+        <many-to-one name="teacher" class="com.edubot.entities.Teacher" fetch="select">
+            <column name="teacher_id" not-null="true" />
+        </many-to-one>
+
+        <property name="courseName" type="java.lang.String">
+            <column name="course_name" length="20" not-null="true" />
+        </property>
+
+        <property name="courseDescription" type="java.lang.String">
+            <column name="course_description" length="1000" not-null="false" />
+        </property>
+
+        <set name="assignments" table="assignment"
+             inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="course_id" />
+            </key>
+            <one-to-many class="com.edubot.entities.Assignment" />
+        </set>
+
+        <set name="students" table="student_course_join"
+             inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="course_id" />
+            </key>
+            <many-to-many entity-name="com.edubot.entities.Student">
+                <column name="student_id" not-null="true" />
+            </many-to-many>
+        </set>
+
+    </class>
+
+</hibernate-mapping>

@@ -3,10 +3,12 @@ package com.edubot.test_methods;
 import com.edubot.entities.*;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
+import org.hibernate.query.Query;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.Set;
 
 /**
@@ -24,9 +26,9 @@ public class SaveTest {
 
             Course course = saveCourse(saveTeacher());
             saveAssignment(course);
-            Student student = saveStudent(course);
+            //Student student = saveStudent(course);
 
-         //   saveStudentCourseJoin(student, course);
+            ShowMeEveryThing();
 
             session.getTransaction().commit();
 
@@ -60,6 +62,18 @@ public class SaveTest {
         course.setTeacher(teacher);
 
         teacher.getCourses().add(course);
+
+        Student student = new Student();
+        student.setName("Mike");
+        student.setCollegeName("Trinity");
+        student.setFacebookId(191923929922L);
+        student.setPageId(9390390393939L);
+        student.setEmail("student202@gmail.com");
+
+        Set<Student> students = new HashSet<>();
+        students.add(student);
+
+        course.setStudents(students);
 
         session.save(course);
 
@@ -117,14 +131,60 @@ public class SaveTest {
 
         course.setStudents(students);
 
+        session.save(course);
+
         return student;
     }
 
-    public void saveStudentCourseJoin(Student student, Course course){
+    public void ShowMeEveryThing(){
 
-        StudentCourseJoin studentCourseJoin = new StudentCourseJoin();
-        studentCourseJoin.setStudentId(student.getStudentId());
-        studentCourseJoin.setCourseId(course.getCourseId());
-        session.save(studentCourseJoin);
+       Query query = session.createQuery("from Student");
+
+        Iterator iterator = query.list().iterator();
+
+        while(iterator.hasNext()){
+
+            Student student = (Student)iterator.next();
+
+            System.out.println("Name - "+student.getName());
+            System.out.println("College Name - "+student.getCollegeName());
+            System.out.println("Facebook Id - "+student.getFacebookId());
+
+
+            Iterator i1 = student.getCourses().iterator();
+
+            while(i1.hasNext()){
+
+                Course course = (Course)i1.next();
+
+                System.out.println("Course name - "+course.getCourseName());
+                System.out.println("Course descr - "+course.getCourseDescription());
+            }
+        }
+
+        query = session.createQuery("from Course");
+
+        iterator = query.list().iterator();
+
+        while(iterator.hasNext()){
+
+            Course course = (Course)iterator.next();
+
+            System.out.println("Name - "+course.getCourseName());
+            System.out.println("College Name - "+course.getCourseDescription());
+
+            Iterator i1 = course.getStudents().iterator();
+
+            while(i1.hasNext()){
+
+                Student student = (Student)i1.next();
+
+                System.out.println("Student Name - "+student.getName());
+                System.out.println("College Name - "+student.getCollegeName());
+                System.out.println("Facebook Id - "+student.getFacebookId());
+            }
+
+        }
     }
+
 }

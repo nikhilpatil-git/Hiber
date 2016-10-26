@@ -3,6 +3,8 @@ package com.edubot.entities;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Student extends Person implements Serializable{
@@ -11,7 +13,7 @@ public class Student extends Person implements Serializable{
     private long studentId;
     private long facebookId;
     private long pageId;
-    //private Set<Course> courses = new HashSet<>(0);
+    private Set<Course> courses = new HashSet<>(0);
 
 
     public Student() {
@@ -41,4 +43,11 @@ public class Student extends Person implements Serializable{
         this.studentId = studentId;
     }
 
+    public Set<Course> getCourses() {
+        return courses;
+    }
+
+    public void setCourses(Set<Course> courses) {
+        this.courses = courses;
+    }
 }

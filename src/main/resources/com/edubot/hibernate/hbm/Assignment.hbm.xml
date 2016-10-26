@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Jan 19, 2010 4:08:57 PM by Hibernate Tools 3.2.5.Beta -->
+<hibernate-mapping>
+
+    <class name="com.edubot.entities.Assignment" table="assignment">
+
+        <id name="assignmentId" type="java.lang.Long">
+            <column name="assignment_id"/>
+            <generator class="identity" />
+        </id>
+
+        <many-to-one name="course" class="com.edubot.entities.Course" fetch="select">
+            <column name="course_id"/>
+        </many-to-one>
+
+        <property name="title" type="java.lang.String">
+            <column name="title" length="100" not-null="true" />
+        </property>
+
+        <property name="description" type="java.lang.String">
+            <column name="description" length="1000" not-null="true" />
+        </property>
+
+        <property name="startDate" type="java.util.Date">
+            <column name="start_date" length="10" not-null="true" />
+        </property>
+
+        <property name="endDate" type="java.util.Date">
+            <column name="end_date" length="10" not-null="true" />
+        </property>
+
+        <property name="numberOfDays" type="java.lang.Integer">
+            <column name="number_of_days" length="3" not-null="true" />
+        </property>
+
+        <property name="marksPerQuestion" type="java.lang.Integer">
+            <column name="marks_per_question" length="2" not-null="true" />
+        </property>
+
+    </class>
+
+</hibernate-mapping>
