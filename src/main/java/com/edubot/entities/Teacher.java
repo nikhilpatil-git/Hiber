@@ -1,4 +1,4 @@
-package com.mkyong.models;
+package com.edubot.entities;
 
 import java.io.Serializable;
 import java.util.HashSet;

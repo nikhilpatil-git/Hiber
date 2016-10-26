@@ -1,4 +1,4 @@
-package com.mkyong.models;
+package com.edubot.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 

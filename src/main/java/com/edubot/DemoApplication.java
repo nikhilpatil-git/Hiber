@@ -1,6 +1,6 @@
-package com.hibernate.testing;
+package com.edubot;
 
-import com.mkyong.persistence.HibernateUtil;
+import com.edubot.util.HibernateUtil;
 import org.hibernate.Session;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

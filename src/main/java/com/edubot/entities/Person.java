@@ -1,4 +1,4 @@
-package com.mkyong.models;
+package com.edubot.entities;
 
 /**
  * Created by deadcode on 23/10/2016.
@@ -6,7 +6,7 @@ package com.mkyong.models;
 public class Person implements java.io.Serializable {
 
     private long personId;
-    private String personName;
+    private String name;
     private String email;
     private String collegeName;
     private boolean emailVerify;
@@ -23,12 +23,12 @@ public class Person implements java.io.Serializable {
         this.personId = personId;
     }
 
-    public String getPersonName() {
-        return personName;
+    public String getName() {
+        return name;
     }
 
-    public void setPersonName(String personName) {
-        this.personName = personName;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getEmail() {

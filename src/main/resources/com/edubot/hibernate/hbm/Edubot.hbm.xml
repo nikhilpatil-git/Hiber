@@ -3,7 +3,7 @@
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <!-- Generated Jan 19, 2010 4:08:57 PM by Hibernate Tools 3.2.5.Beta -->
 <hibernate-mapping>
-    <class name="com.mkyong.models.Person" table="person" catalog="mkyongdb">
+    <class name="com.edubot.entities.Person" table="person" catalog="mkyongdb">
 
         <id name="personId" type="java.lang.Long">
             <column name="person_id" />
@@ -12,8 +12,8 @@
 
         <discriminator column="person_type" type="java.lang.String"/>
 
-        <property name="personName" type="java.lang.String">
-            <column name="person_name" length="20" not-null="true" />
+        <property name="name" type="java.lang.String">
+            <column name="name" length="20" not-null="true" />
         </property>
 
         <property name="collegeName" type="java.lang.String" column="college_name" length="100"/>
@@ -22,13 +22,13 @@
 
         <property name="emailVerify" type="java.lang.Boolean" column="email_verify"/>
 
-        <subclass name="com.mkyong.models.Teacher" discriminator-value="teacher">
+        <subclass name="com.edubot.entities.Teacher" discriminator-value="TEACHER">
             <set name="courses" table="course"
                  inverse="true" lazy="true" fetch="select">
                 <key>
                     <column name="teacher_id" not-null="true" />
                 </key>
-                <one-to-many class="com.mkyong.models.Course" />
+                <one-to-many class="com.edubot.entities.Course" />
             </set>
             <join table="teacher">
                 <key column="teacher_id"/>
@@ -37,16 +37,36 @@
 
         </subclass>
 
+        <subclass name="com.edubot.entities.Student" discriminator-value="STUDENT">
+
+<!--            <set name="courses" table="course"
+                 inverse="true" lazy="true" fetch="select">
+                <key>
+                    <column name="student_id" not-null="true" />
+                </key>
+                <many-to-many entity-name="com.edubot.entities.Course">
+                    <column name="course_id" not-null="true" />
+                </many-to-many>
+            </set>-->
+
+            <join table="student">
+                <key column="student_id"/>
+                <property name="facebookId" type="java.lang.Long" column="facebook_id"/>
+                <property name="pageId" type="java.lang.Long" column="page_id"/>
+            </join>
+
+        </subclass>
+
     </class>
 
-    <class name="com.mkyong.models.Course" table="course" catalog="mkyongdb">
+    <class name="com.edubot.entities.Course" table="course" catalog="mkyongdb">
 
         <id name="courseId" type="java.lang.Long">
             <column name="course_id" />
             <generator class="identity" />
         </id>
 
-        <many-to-one name="teacher" class="com.mkyong.models.Teacher" fetch="select">
+        <many-to-one name="teacher" class="com.edubot.entities.Teacher" fetch="select">
             <column name="teacher_id" not-null="true" />
         </many-to-one>
 
@@ -63,19 +83,29 @@
             <key>
                 <column name="course_id" />
             </key>
-            <one-to-many class="com.mkyong.models.Assignment" />
+            <one-to-many class="com.edubot.entities.Assignment" />
+        </set>
+
+        <set name="students" table="student"
+             inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="course_id" />
+            </key>
+            <many-to-many entity-name="com.edubot.entities.Student">
+                <column name="student_id" not-null="true" />
+            </many-to-many>
         </set>
 
     </class>
 
-    <class name="com.mkyong.models.Assignment" table="assignment">
+    <class name="com.edubot.entities.Assignment" table="assignment">
 
         <id name="assignmentId" type="java.lang.Long">
             <column name="assignment_id"/>
             <generator class="identity" />
         </id>
 
-        <many-to-one name="course" class="com.mkyong.models.Course" fetch="select">
+        <many-to-one name="course" class="com.edubot.entities.Course" fetch="select">
             <column name="course_id"/>
         </many-to-one>
 
@@ -104,7 +134,6 @@
         </property>
 
     </class>
-
 
 
 </hibernate-mapping>
