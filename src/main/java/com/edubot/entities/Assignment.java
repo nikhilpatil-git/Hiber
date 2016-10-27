@@ -4,6 +4,8 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Assignment implements Serializable {
@@ -16,6 +18,7 @@ public class Assignment implements Serializable {
     private int numberOfDays;
     private int marksPerQuestion;
     private Course course;
+    private Set<AbstractQuestion> questions = new HashSet<>(0);
 
     public Course getCourse() {
         return course;
@@ -80,5 +83,13 @@ public class Assignment implements Serializable {
 
     public void setMarksPerQuestion(int marksPerQuestion) {
         this.marksPerQuestion = marksPerQuestion;
+    }
+
+    public Set<AbstractQuestion> getQuestions() {
+        return questions;
+    }
+
+    public void setQuestions(Set<AbstractQuestion> questions) {
+        this.questions = questions;
     }
 }

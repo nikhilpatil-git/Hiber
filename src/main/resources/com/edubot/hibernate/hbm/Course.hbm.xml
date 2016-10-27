@@ -31,7 +31,15 @@
             <one-to-many class="com.edubot.entities.Assignment" />
         </set>
 
-        <set name="students" table="student_course_join"
+
+        <set name="students" table="list" lazy="true">
+            <key column="course_id"/>
+            <many-to-many entity-name="com.edubot.entities.Student">
+                <column name="student_id"/>
+            </many-to-many>
+        </set>
+
+<!--        <set name="students" table="student_course_join"
              inverse="true" lazy="true" fetch="select">
             <key>
                 <column name="course_id" />
@@ -39,7 +47,7 @@
             <many-to-many entity-name="com.edubot.entities.Student">
                 <column name="student_id" not-null="true" />
             </many-to-many>
-        </set>
+        </set>-->
 
     </class>
 

@@ -20,5 +20,7 @@
 
 		<mapping resource="com/edubot/hibernate/hbm/Assignment.hbm.xml" />
 
+        <mapping resource="com/edubot/hibernate/hbm/Question.hbm.xml" />
+
 	</session-factory>
 </hibernate-configuration>

@@ -1,0 +1,66 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Jan 19, 2010 4:08:57 PM by Hibernate Tools 3.2.5.Beta -->
+<hibernate-mapping>
+    <class name="com.edubot.entities.AbstractQuestion" table="question">
+
+        <id name="questionId" type="java.lang.Long">
+            <column name="question_id" />
+            <generator class="identity" />
+        </id>
+
+        <discriminator column="question_type" type="java.lang.String"/>
+
+        <property name="text" type="java.lang.String">
+            <column name="text" length="1000" not-null="true" />
+        </property>
+
+        <property name="hint" type="java.lang.String">
+            <column name="hint" length="1000" not-null="true" />
+        </property>
+
+        <property name="rightAnswer" type="java.lang.Integer">
+            <column name="right_answer" length="2" not-null="true" />
+        </property>
+
+        <property name="sequence" type="java.lang.Integer">
+            <column name="sequence" length="2" not-null="true" />
+        </property>
+
+        <subclass name="com.edubot.entities.MCQQuestion" discriminator-value="MCQ">
+
+            <join table="mcq_question">
+                <key column="question_id"/>
+
+                <property name="option1" type="java.lang.String">
+                    <column name="option_1" length="1000" not-null="true" />
+                </property>
+
+                <property name="option2" type="java.lang.String">
+                    <column name="option_2" length="1000" not-null="true" />
+                </property>
+
+                <property name="option3" type="java.lang.String">
+                    <column name="option_3" length="1000" not-null="true" />
+                </property>
+
+                <property name="option4" type="java.lang.String">
+                    <column name="option_4" length="1000" not-null="true" />
+                </property>
+
+            </join>
+
+        </subclass>
+
+        <subclass name="com.edubot.entities.TrueFalseQuestion" discriminator-value="TF">
+
+            <join table="tf_question">
+                <key column="question_id"/>
+            </join>
+
+        </subclass>
+
+    </class>
+
+</hibernate-mapping>

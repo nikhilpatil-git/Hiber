@@ -8,19 +8,27 @@ import java.io.Serializable;
 public abstract class AbstractQuestion implements Serializable{
 
     private static final long serialVersionUID = 1L;
-    private long abstractQuestionId;
+    private long questionId;
     private String text;
     private String hint;
     private int rightAnswer;
     private int sequence;
+    private Assignment assignment;
 
-
-    public long getAbstractQuestionId() {
-        return abstractQuestionId;
+    public long getQuestionId() {
+        return questionId;
     }
 
-    public void setAbstractQuestionId(long abstractQuestionId) {
-        this.abstractQuestionId = abstractQuestionId;
+    public void setQuestionId(long questionId) {
+        this.questionId = questionId;
+    }
+
+    public Assignment getAssignment() {
+        return assignment;
+    }
+
+    public void setAssignment(Assignment assignment) {
+        this.assignment = assignment;
     }
 
     public String getText() {
@@ -45,5 +53,13 @@ public abstract class AbstractQuestion implements Serializable{
 
     public void setRightAnswer(int rightAnswer) {
         this.rightAnswer = rightAnswer;
+    }
+
+    public int getSequence() {
+        return sequence;
+    }
+
+    public void setSequence(int sequence) {
+        this.sequence = sequence;
     }
 }

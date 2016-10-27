@@ -8,10 +8,20 @@ import java.io.Serializable;
 public class MCQQuestion extends AbstractQuestion implements Serializable{
 
     private static final long serialVersionUID = 1L;
+
+    private long questionId;
     private String option1;
     private String option2;
     private String option3;
     private String option4;
+
+    public long getQuestionId() {
+        return questionId;
+    }
+
+    public void setQuestionId(long questionId) {
+        this.questionId = questionId;
+    }
 
     public String getOption1() {
         return option1;

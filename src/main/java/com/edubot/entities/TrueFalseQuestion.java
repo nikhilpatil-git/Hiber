@@ -8,7 +8,16 @@ import java.io.Serializable;
 public class TrueFalseQuestion extends AbstractQuestion implements Serializable{
 
     private static final long serialVersionUID = 1L;
+    private long questionId;
 
     public TrueFalseQuestion() {
+    }
+
+    public long getQuestionId() {
+        return questionId;
+    }
+
+    public void setQuestionId(long questionId) {
+        this.questionId = questionId;
     }
 }
