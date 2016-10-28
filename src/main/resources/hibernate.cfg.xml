@@ -22,5 +22,7 @@
 
         <mapping resource="com/edubot/hibernate/hbm/Question.hbm.xml" />
 
+        <mapping resource="com/edubot/hibernate/hbm/StroryLine.hbm.xml" />
+
 	</session-factory>
 </hibernate-configuration>

@@ -14,6 +14,15 @@ public abstract class AbstractQuestion implements Serializable{
     private int rightAnswer;
     private int sequence;
     private Assignment assignment;
+/*    private QuestionStoryLine questionStoryLine;
+
+    public QuestionStoryLine getQuestionStoryLine() {
+        return questionStoryLine;
+    }
+
+    public void setQuestionStoryLine(QuestionStoryLine questionStoryLine) {
+        this.questionStoryLine = questionStoryLine;
+    }*/
 
     public long getQuestionId() {
         return questionId;

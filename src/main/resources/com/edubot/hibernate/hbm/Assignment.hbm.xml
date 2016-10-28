@@ -18,7 +18,7 @@
         <set name="questions" table="question"
              inverse="true" lazy="true" fetch="select">
             <key>
-                <column name="assignment_id" not-null="true" />
+                <column name="assignment_id" not-null="false" />
             </key>
             <one-to-many class="com.edubot.entities.AbstractQuestion" />
         </set>

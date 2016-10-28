@@ -39,16 +39,6 @@
 
         <subclass name="com.edubot.entities.Student" discriminator-value="STUDENT">
 
-            <set name="courses" table="student_course_join"
-                 inverse="false" lazy="true" fetch="select" cascade="all">
-                <key>
-                    <column name="student_id" not-null="true" />
-                </key>
-                <many-to-many entity-name="com.edubot.entities.Course">
-                    <column name="course_id" not-null="true" />
-                </many-to-many>
-            </set>
-
             <join table="student">
                 <key column="student_id"/>
                 <property name="facebookId" type="java.lang.Long" column="facebook_id"/>

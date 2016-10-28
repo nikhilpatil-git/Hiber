@@ -12,6 +12,13 @@
 
         <discriminator column="question_type" type="java.lang.String"/>
 
+        <many-to-one name="assignment" class="com.edubot.entities.Assignment" fetch="select">
+            <column name="assignment_id"/>
+        </many-to-one>
+
+<!--        <one-to-one name="questionStoryLine" class="com.edubot.entities.story.QuestionStoryLine"
+                    cascade="save-update"  ></one-to-one>-->
+
         <property name="text" type="java.lang.String">
             <column name="text" length="1000" not-null="true" />
         </property>

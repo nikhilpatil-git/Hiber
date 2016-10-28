@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Jan 19, 2010 4:08:57 PM by Hibernate Tools 3.2.5.Beta -->
+<hibernate-mapping>
+    <class name="com.edubot.entities.story.AbstractStoryLine" table="story_line">
+
+        <id name="storyLineId" type="java.lang.Long">
+            <column name="story_line_id" />
+            <generator class="identity" />
+        </id>
+
+        <discriminator column="story_line_type" type="java.lang.String"/>
+
+        <property name="sequence" type="java.lang.Integer">
+            <column name="sequence" length="10" not-null="true" />
+        </property>
+
+        <subclass name="com.edubot.entities.story.MessageStoryLine" discriminator-value="MESSAGE">
+
+            <join table="message_story_line">
+                <key column="story_line_id"/>
+
+                <property name="text" type="java.lang.String">
+                    <column name="text" length="1000" not-null="true" />
+                </property>
+
+            </join>
+
+        </subclass>
+
+        <subclass name="com.edubot.entities.story.QuestionStoryLine" discriminator-value="QUESTION">
+
+            <one-to-one name="question" class="com.edubot.entities.AbstractQuestion"
+                        cascade="save-update"/>
+
+            <join table="question_story_line">
+                <key column="story_line_id"/>
+            </join>
+
+        </subclass>
+
+    </class>
+
+</hibernate-mapping>

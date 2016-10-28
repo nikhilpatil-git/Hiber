@@ -1,12 +1,16 @@
 package com.edubot.test_methods;
 
 import com.edubot.entities.*;
+import com.edubot.entities.story.MessageStoryLine;
+import com.edubot.entities.story.QuestionStoryLine;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
+import org.hibernate.query.Query;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.Set;
 
 /**
@@ -22,14 +26,16 @@ public class SaveTest {
 
             session.beginTransaction();
 
-            saveQuestion();
-    //        Course course = saveCourse(saveTeacher());
-  //          saveAssignment(course);
-//            Student student = saveStudent(course);
 
-         //   ShowMeEveryThing();
+/*            Course course = saveCourse(saveTeacher());
+            Assignment assignment = saveAssignment(course);
+            Student student = saveStudent(course);*/
 
-         //   showCourses();
+            showMeQuestions();
+            showMeStoryLines();
+
+            // AbstractQuestion question = saveQuestion(assignment);
+
 
             session.getTransaction().commit();
 
@@ -70,7 +76,32 @@ public class SaveTest {
         return course;
     }
 
-    public void saveAssignment(Course course){
+    public Assignment saveAssignment(Course course){
+
+        MCQQuestion question = new MCQQuestion();
+        question.setText("what is a physics");
+        question.setHint("who is issac newton");
+        question.setOption1("something");
+        question.setOption2("something");
+        question.setOption3("something");
+        question.setOption4("something");
+        question.setRightAnswer(2);
+        question.setSequence(1);
+
+        TrueFalseQuestion trueFalseQuestion = new TrueFalseQuestion();
+        trueFalseQuestion.setText("what is a physics");
+        trueFalseQuestion.setHint("who is issac newton");
+        trueFalseQuestion.setRightAnswer(1);
+        question.setSequence(2);
+
+
+        MessageStoryLine messageStoryLine = new MessageStoryLine();
+        messageStoryLine.setText("All is good man");
+        session.save(messageStoryLine);
+
+        QuestionStoryLine questionStoryLine = new QuestionStoryLine();
+        questionStoryLine.setQuestion(question);
+        session.save(questionStoryLine);
 
         Date startDate = new Date();
         Date endDate = new Date();
@@ -89,11 +120,23 @@ public class SaveTest {
         assignment.setNumberOfDays(7);
         assignment.setMarksPerQuestion(10);
 
+        Set<AbstractQuestion> set = new HashSet<>();
+        set.add(question);
+        set.add(trueFalseQuestion);
+
+        assignment.setQuestions(set);
+
         assignment.setCourse(course);
         course.getAssignments().add(assignment);
 
+        question.setAssignment(assignment);
+        trueFalseQuestion.setAssignment(assignment);
+
+        session.save(question);
+        session.save(trueFalseQuestion);
         session.save(assignment);
 
+        return assignment;
     }
 
     public Student saveStudent(Course course){
@@ -125,7 +168,7 @@ public class SaveTest {
         return student;
     }
 
-    public void saveQuestion(){
+    public MCQQuestion saveQuestion(Assignment assignment){
 
         MCQQuestion question = new MCQQuestion();
         question.setText("what is a physics");
@@ -135,56 +178,51 @@ public class SaveTest {
         question.setOption3("something");
         question.setOption4("something");
         question.setRightAnswer(2);
+        question.setAssignment(assignment);
         session.save(question);
 
-        TrueFalseQuestion trueFalseQuestion = new TrueFalseQuestion();
+/*        TrueFalseQuestion trueFalseQuestion = new TrueFalseQuestion();
         trueFalseQuestion.setText("what is a physics");
         trueFalseQuestion.setHint("who is issac newton");
         trueFalseQuestion.setRightAnswer(1);
-        session.save(trueFalseQuestion);
+        session.save(trueFalseQuestion);*/
 
+        MessageStoryLine messageStoryLine = new MessageStoryLine();
+        messageStoryLine.setText("All is good man");
+        session.save(messageStoryLine);
 
+        QuestionStoryLine questionStoryLine = new QuestionStoryLine();
+        questionStoryLine.setQuestion(question);
+        session.save(questionStoryLine);
 
+        return question;
     }
-/*
-    public void ShowMeEveryThing(){
 
-       Query query = session.createQuery("from Student");
+    public void showMeQuestions(){
+
+       Query query = session.createQuery("from AbstractQuestion where question_type = 'MCQ'");
 
         Iterator iterator = query.list().iterator();
 
         while(iterator.hasNext()){
 
-            Student student = (Student)iterator.next();
+            MCQQuestion mcqQuestion = (MCQQuestion) iterator.next();
 
-            System.out.println("Name - "+student.getName());
-            System.out.println("College Name - "+student.getCollegeName());
-            System.out.println("Facebook Id - "+student.getFacebookId());
-
+            System.out.println("QuestionText-"+mcqQuestion.getText());
+            System.out.println("QuestionAssignmentTitle-"+mcqQuestion.getAssignment().getTitle());
         }
+    }
 
-        query = session.createQuery("from Course");
+    public void showMeStoryLines(){
+        Query query = session.createQuery("from QuestionStoryLine ");
 
-        iterator = query.list().iterator();
+        Iterator iterator = query.list().iterator();
 
         while(iterator.hasNext()){
 
-            Course course = (Course)iterator.next();
+            QuestionStoryLine questionStoryLine = (QuestionStoryLine) iterator.next();
 
-            System.out.println("Name - "+course.getCourseName());
-            System.out.println("College Name - "+course.getCourseDescription());
-
-            Iterator i1 = course.getStudents().iterator();
-
-            while(i1.hasNext()){
-
-                Student student = (Student)i1.next();
-
-                System.out.println("Student Name - "+student.getName());
-                System.out.println("College Name - "+student.getCollegeName());
-                System.out.println("Facebook Id - "+student.getFacebookId());
-            }
-
+            System.out.println("StoryLineQuestionText-"+questionStoryLine.getQuestion().getText());
         }
     }
 
@@ -216,6 +254,6 @@ public class SaveTest {
         }
 
     }
-*/
+
 
 }
