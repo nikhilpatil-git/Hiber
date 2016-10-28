@@ -1,5 +1,6 @@
-package com.edubot.entities;
+package com.edubot.entities.person;
 
+import com.edubot.entities.person.Person;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import java.io.Serializable;

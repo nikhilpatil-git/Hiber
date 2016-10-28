@@ -31,7 +31,7 @@
 
         <subclass name="com.edubot.entities.story.QuestionStoryLine" discriminator-value="QUESTION">
 
-            <one-to-one name="question" class="com.edubot.entities.AbstractQuestion"
+            <one-to-one name="question" class="com.edubot.entities.question.AbstractQuestion"
                         cascade="save-update"/>
 
             <join table="question_story_line">

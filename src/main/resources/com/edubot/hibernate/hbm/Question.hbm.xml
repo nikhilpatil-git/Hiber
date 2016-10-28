@@ -3,7 +3,7 @@
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <!-- Generated Jan 19, 2010 4:08:57 PM by Hibernate Tools 3.2.5.Beta -->
 <hibernate-mapping>
-    <class name="com.edubot.entities.AbstractQuestion" table="question">
+    <class name="com.edubot.entities.question.AbstractQuestion" table="question">
 
         <id name="questionId" type="java.lang.Long">
             <column name="question_id" />
@@ -35,7 +35,7 @@
             <column name="sequence" length="2" not-null="true" />
         </property>
 
-        <subclass name="com.edubot.entities.MCQQuestion" discriminator-value="MCQ">
+        <subclass name="com.edubot.entities.question.MCQQuestion" discriminator-value="MCQ">
 
             <join table="mcq_question">
                 <key column="question_id"/>
@@ -60,7 +60,7 @@
 
         </subclass>
 
-        <subclass name="com.edubot.entities.TrueFalseQuestion" discriminator-value="TF">
+        <subclass name="com.edubot.entities.question.TrueFalseQuestion" discriminator-value="TF">
 
             <join table="tf_question">
                 <key column="question_id"/>

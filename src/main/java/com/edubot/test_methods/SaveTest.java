@@ -1,8 +1,13 @@
 package com.edubot.test_methods;
 
 import com.edubot.entities.*;
+import com.edubot.entities.person.Teacher;
+import com.edubot.entities.question.AbstractQuestion;
+import com.edubot.entities.question.MCQQuestion;
+import com.edubot.entities.question.TrueFalseQuestion;
 import com.edubot.entities.story.MessageStoryLine;
 import com.edubot.entities.story.QuestionStoryLine;
+import com.edubot.entities.person.Student;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
@@ -27,9 +32,9 @@ public class SaveTest {
             session.beginTransaction();
 
 
-/*            Course course = saveCourse(saveTeacher());
+            Course course = saveCourse(saveTeacher());
             Assignment assignment = saveAssignment(course);
-            Student student = saveStudent(course);*/
+            Student student = saveStudent(course);
 
             showMeQuestions();
             showMeStoryLines();

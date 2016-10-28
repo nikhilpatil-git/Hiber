@@ -1,4 +1,4 @@
-package com.edubot.entities;
+package com.edubot.entities.question;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 

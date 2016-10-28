@@ -20,7 +20,7 @@
             <key>
                 <column name="assignment_id" not-null="false" />
             </key>
-            <one-to-many class="com.edubot.entities.AbstractQuestion" />
+            <one-to-many class="com.edubot.entities.question.AbstractQuestion" />
         </set>
 
         <property name="title" type="java.lang.String">

@@ -1,4 +1,6 @@
-package com.edubot.entities;
+package com.edubot.entities.question;
+
+import com.edubot.entities.Assignment;
 
 import java.io.Serializable;
 

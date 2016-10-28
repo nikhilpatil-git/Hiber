@@ -1,5 +1,8 @@
 package com.edubot.entities;
 
+import com.edubot.entities.person.Teacher;
+import com.edubot.entities.person.Student;
+
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;

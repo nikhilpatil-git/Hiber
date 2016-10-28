@@ -1,6 +1,6 @@
 package com.edubot.entities.story;
 
-import com.edubot.entities.AbstractQuestion;
+import com.edubot.entities.question.AbstractQuestion;
 
 /**
  * Created by deadcode on 28/10/2016.

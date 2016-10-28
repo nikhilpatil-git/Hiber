@@ -3,7 +3,7 @@
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <!-- Generated Jan 19, 2010 4:08:57 PM by Hibernate Tools 3.2.5.Beta -->
 <hibernate-mapping>
-    <class name="com.edubot.entities.Person" table="person" catalog="mkyongdb">
+    <class name="com.edubot.entities.person.Person" table="person" catalog="mkyongdb">
 
         <id name="personId" type="java.lang.Long">
             <column name="person_id" />
@@ -22,7 +22,7 @@
 
         <property name="emailVerify" type="java.lang.Boolean" column="email_verify"/>
 
-        <subclass name="com.edubot.entities.Teacher" discriminator-value="TEACHER">
+        <subclass name="com.edubot.entities.person.Teacher" discriminator-value="TEACHER">
             <set name="courses" table="course"
                  inverse="true" lazy="true" fetch="select">
                 <key>
@@ -37,7 +37,7 @@
 
         </subclass>
 
-        <subclass name="com.edubot.entities.Student" discriminator-value="STUDENT">
+        <subclass name="com.edubot.entities.person.Student" discriminator-value="STUDENT">
 
             <join table="student">
                 <key column="student_id"/>

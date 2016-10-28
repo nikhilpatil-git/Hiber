@@ -1,4 +1,4 @@
-package com.edubot.entities;
+package com.edubot.entities.person;
 
 /**
  * Created by deadcode on 23/10/2016.

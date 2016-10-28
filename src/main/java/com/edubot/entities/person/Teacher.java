@@ -1,4 +1,6 @@
-package com.edubot.entities;
+package com.edubot.entities.person;
+
+import com.edubot.entities.Course;
 
 import java.io.Serializable;
 import java.util.HashSet;
