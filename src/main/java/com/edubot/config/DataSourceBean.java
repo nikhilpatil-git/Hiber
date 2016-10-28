@@ -1,22 +1,30 @@
 package com.edubot.config;
 
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.jdbc.datasource.DriverManagerDataSource;
 
 @Configuration
 public class DataSourceBean {
 
     @Bean
-    public DriverManagerDataSource dataSource() {
-        DriverManagerDataSource dataSource = new DriverManagerDataSource();
+    public Session dataSource(){
 
-        dataSource.setDriverClassName("org.postgresql.Driver");
-        dataSource.setUrl("jdbc:postgresql://localhost:5432/EduBot");
-        dataSource.setUsername("postgres");
-        dataSource.setPassword("Nik@9911150989");
+        Session session;
 
-        return dataSource;
+        try {
+            // Create the SessionFactory from hibernate.cfg.xml
+            SessionFactory sessionFactory = new org.hibernate.cfg.Configuration().configure().buildSessionFactory();
+            session = sessionFactory.getCurrentSession();
+        }
+        catch (Throwable ex) {
+            // Make sure you log the exception, as it might be swallowed
+            System.err.println("Initial SessionFactory creation failed." + ex);
+            throw new ExceptionInInitializerError(ex);
+        }
+
+        return session;
     }
 
 }

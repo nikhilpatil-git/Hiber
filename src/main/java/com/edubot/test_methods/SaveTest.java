@@ -31,7 +31,6 @@ public class SaveTest {
 
             session.beginTransaction();
 
-
             Course course = saveCourse(saveTeacher());
             Assignment assignment = saveAssignment(course);
             Student student = saveStudent(course);
