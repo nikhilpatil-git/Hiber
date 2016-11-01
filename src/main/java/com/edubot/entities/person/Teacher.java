@@ -41,4 +41,5 @@ public class Teacher extends Person implements Serializable {
     public void setCourses(Set<Course> courses) {
         this.courses = courses;
     }
+
 }

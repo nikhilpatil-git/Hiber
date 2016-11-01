@@ -1,0 +1,22 @@
+package com.edubot.converters;
+
+import com.edubot.entities.person.Teacher;
+import com.edubot.forms.FacebookSignupForm;
+
+/**
+ * Created by deadcode on 30/10/2016.
+ */
+public class FacebookSignupFormConverter {
+
+    public static Teacher convertToTeacher(FacebookSignupForm facebookSignupForm){
+
+        Teacher teacher = new Teacher();
+        teacher.setFirstName(facebookSignupForm.getFirstName());
+        teacher.setLastName(facebookSignupForm.getLastName());
+        teacher.setGender(facebookSignupForm.getGender());
+        teacher.setCollegeName(facebookSignupForm.getCollegeName());
+
+        return teacher;
+    }
+
+}

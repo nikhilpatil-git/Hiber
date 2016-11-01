@@ -1,9 +1,9 @@
 package com.edubot.config;
 
-import com.edubot.daos.TeacherDAO;
-import com.edubot.daos.impl.TeacherDAOImpl;
-import com.edubot.services.TeacherService;
-import com.edubot.services.impl.TeacherServiceImpl;
+import com.edubot.daos.StudentDAO;
+import com.edubot.daos.impl.StudentDAOImpl;
+import com.edubot.services.StudentService;
+import com.edubot.services.impl.StudentServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -11,20 +11,18 @@ import org.springframework.context.annotation.Import;
 
 @Configuration
 @Import({DataSourceBean.class})
-public class TeacherBean {
+public class StudentBean {
 
     @Autowired
     DataSourceBean dataSourceBean;
 
     @Bean
-    public TeacherDAO teacherDAO(){
-        return new TeacherDAOImpl();
+    public StudentDAO studentDAO(){
+        return new StudentDAOImpl();
     }
 
     @Bean
-    public TeacherService teacherService(){
-        return new TeacherServiceImpl();
+    public StudentService studentService(){
+        return new StudentServiceImpl();
     }
-
-
 }

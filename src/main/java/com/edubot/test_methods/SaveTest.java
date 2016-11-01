@@ -1,16 +1,22 @@
 package com.edubot.test_methods;
 
-import com.edubot.entities.*;
+import com.edubot.config.TeacherBean;
+import com.edubot.daos.TeacherDAO;
+import com.edubot.daos.impl.TeacherDAOImpl;
+import com.edubot.entities.Assignment;
+import com.edubot.entities.Course;
+import com.edubot.entities.person.Student;
 import com.edubot.entities.person.Teacher;
 import com.edubot.entities.question.AbstractQuestion;
 import com.edubot.entities.question.MCQQuestion;
 import com.edubot.entities.question.TrueFalseQuestion;
 import com.edubot.entities.story.MessageStoryLine;
 import com.edubot.entities.story.QuestionStoryLine;
-import com.edubot.entities.person.Student;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -31,12 +37,23 @@ public class SaveTest {
 
             session.beginTransaction();
 
-            Course course = saveCourse(saveTeacher());
+            Teacher teacher = saveTeacher();
+
+            ApplicationContext applicationContext = new AnnotationConfigApplicationContext(TeacherBean.class);
+            TeacherDAO teacherDAO = applicationContext.getBean(TeacherDAOImpl.class);
+
+            teacher = teacherDAO.getTeacherFromId(1);
+            System.out.println("TeacherName"+teacher.getFirstName());
+
+//            teacherDAO.insertTeacher(teacher);
+
+
+/*            Course course = saveCourse(saveTeacher());
             Assignment assignment = saveAssignment(course);
             Student student = saveStudent(course);
 
             showMeQuestions();
-            showMeStoryLines();
+            showMeStoryLines();*/
 
             // AbstractQuestion question = saveQuestion(assignment);
 
@@ -55,12 +72,12 @@ public class SaveTest {
 
     public Teacher saveTeacher(){
         Teacher teacher = new Teacher();
-        teacher.setName("Swati");
-        teacher.setEmail("patilndddikhil9@gmail.com");
+        teacher.setFirstName("Jyoti");
+        teacher.setLastName("Patil");
+        teacher.setEmail("patilskhil9@gmail.com");
         teacher.setCollegeName("DdddIT");
         teacher.setEmailVerify(true);
         teacher.setAlias("Mikddde");
-        session.save(teacher);
 
         return teacher;
     }
@@ -146,7 +163,8 @@ public class SaveTest {
     public Student saveStudent(Course course){
 
         Student student = new Student();
-        student.setName("Mike");
+        student.setFirstName("Mike");
+        student.setLastName("Shenoda");
         student.setCollegeName("Trinity");
         student.setFacebookId(191923929922L);
         student.setPageId(9390390393939L);
@@ -154,7 +172,8 @@ public class SaveTest {
         session.save(student);
 
         Student student2 = new Student();
-        student2.setName("Nike");
+        student.setFirstName("Mike");
+        student.setLastName("Shenoda");
         student2.setCollegeName("DIT");
         student2.setFacebookId(191923929922L);
         student2.setPageId(9390390393939L);
@@ -250,7 +269,7 @@ public class SaveTest {
 
                 Student student = (Student)i1.next();
 
-                System.out.println("CourseStudentName"+student.getName());
+                System.out.println("CourseStudentName"+student.getFirstName());
                 System.out.println("CourseStudentCollegeName"+student.getCollegeName());
                 System.out.println("CourseStudentFacebookId"+student.getFacebookId());
             }

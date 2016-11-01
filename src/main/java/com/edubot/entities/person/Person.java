@@ -6,14 +6,15 @@ package com.edubot.entities.person;
 public class Person implements java.io.Serializable {
 
     private long personId;
-    private String name;
+    private String firstName;
+    private String lastName;
     private String email;
     private String collegeName;
     private boolean emailVerify;
+    private String gender;
 
     public Person() {
     }
-
 
     public long getPersonId() {
         return personId;
@@ -23,12 +24,20 @@ public class Person implements java.io.Serializable {
         this.personId = personId;
     }
 
-    public String getName() {
-        return name;
+    public String getLastName() {
+        return lastName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
     }
 
     public String getEmail() {
@@ -55,4 +64,11 @@ public class Person implements java.io.Serializable {
         this.emailVerify = emailVerify;
     }
 
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
 }
