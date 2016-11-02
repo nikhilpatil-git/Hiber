@@ -29,18 +29,12 @@ public class TeacherController extends ControllerHelper {
         /**
          * Generate token from the facebook signup details
          */
-        String token = securityFacade.createSessionReturnToken(facebookSignupForm);
+        String token = teacherFacade.registerPersonReturnToken(facebookSignupForm);
 
         /**
          * Embed generated token in response headers
          */
         embedTokenInResponse(token);
-
-        /**
-         * Store the facebook signup details in the database
-         */
-
-        teacherFacade.registerFacebookDetails(facebookSignupForm);
 
         return new ResponseEntity<>(101, getResponseHeaders(), HttpStatus.OK);
     }

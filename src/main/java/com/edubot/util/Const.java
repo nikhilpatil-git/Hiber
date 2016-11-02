@@ -6,10 +6,16 @@ import java.util.ArrayList;
 
 public class Const {
 
+    public final static String SecretMessage = "*********EduBot*********";
+
     public static long PageId = 1L;
 
     public static enum QuestionType{
         MCQ, TF
+    }
+
+    public static enum SessionStatus {
+        VALID, INVALID, EXPIRED
     }
 
     public static ApplicationContext applicationContext;

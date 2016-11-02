@@ -1,19 +1,15 @@
 package com.edubot.services.impl;
 
-import com.edubot.checkpoint.Session;
+import io.jsonwebtoken.JwtBuilder;
 
 /**
  * Created by deadcode on 01/11/2016.
  */
 public class SecurityServiceImpl implements SecurityService {
 
-
     @Override
-    public String generateTokenFromSession(Session session) {
+    public String generateToken(JwtBuilder jwtBuilder) {
 
-
-
-        return null;
+        return jwtBuilder.compact();
     }
-
 }

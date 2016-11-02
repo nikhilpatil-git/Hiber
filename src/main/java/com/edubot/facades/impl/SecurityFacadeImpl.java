@@ -1,11 +1,9 @@
 package com.edubot.facades.impl;
 
 import com.edubot.checkpoint.Session;
-import com.edubot.converters.FacebookSignupFormConverter;
 import com.edubot.facades.JWTFacade;
 import com.edubot.facades.RedisFacade;
 import com.edubot.facades.SecurityFacade;
-import com.edubot.forms.FacebookSignupForm;
 import com.edubot.services.impl.SecurityService;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -25,26 +23,24 @@ public class SecurityFacadeImpl implements SecurityFacade {
 
 
     @Override
-    public String createSessionReturnToken(FacebookSignupForm facebookSignupForm) {
+    public String generateTokenFromSession(Session session) {
 
-        /**
-         * Convert FacebookSignupForm object to Session object.
-         */
-        Session session = FacebookSignupFormConverter.convertToSession(facebookSignupForm);
-
-
-        System.out.println("Session is created "+session.getFbId());
-
-        /**
+        /*
          * Store session in the in-memory redis database.
-         */
+        */
         redisFacade.storeSession(session);
 
-        /**
-         * Generate and return token holding the session details.
-         */
+        /*
+         * Generate and return token from session.
+        */
 
-        return jwtFacade.generateTokenFromSession(session);
+        return jwtFacade.generateAuthTokenFromSession(session);
     }
 
+    @Override
+    public String authenticateTokenReturnSessionId(String token) {
+
+
+        return null;
+    }
 }

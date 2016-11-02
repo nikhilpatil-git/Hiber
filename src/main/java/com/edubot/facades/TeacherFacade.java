@@ -7,6 +7,7 @@ import com.edubot.forms.FacebookSignupForm;
  */
 public interface TeacherFacade {
 
+    public String registerPersonReturnToken(FacebookSignupForm facebookSignupForm);
     public void registerFacebookDetails(FacebookSignupForm facebookSignupForm);
     public void registerEmail(String email);
 }

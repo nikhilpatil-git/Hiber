@@ -16,7 +16,7 @@ public class RedisServiceImpl implements RedisService {
     @Override
     public boolean storeSession(Session session) {
 
-        redisTemplate.opsForHash().put("Session", session.getFbId(), session);
+        redisTemplate.opsForHash().put(session.getFirstName(), session.getFbId(), session);
 
         return (loadSession(session.getFbId())) != null ? true : false;
     }

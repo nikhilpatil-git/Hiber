@@ -57,7 +57,7 @@ public abstract class SuperDAO {
 
         try {
 
-             object = getSession().createQuery(queryText).getSingleResult();
+            object = getSession().createQuery(queryText).getSingleResult();
 
         }catch (QueryException qx){
 

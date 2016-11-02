@@ -1,7 +1,10 @@
 package com.edubot.services.impl;
 
 import com.edubot.services.JWTService;
+import com.edubot.util.Const;
+import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.JwtBuilder;
+import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 
 import javax.crypto.SecretKey;
@@ -60,6 +63,40 @@ public class JWTServiceImpl implements JWTService {
     public JwtBuilder signWithKey(JwtBuilder jwtBuilder, SecretKey secretKey) {
 
         return jwtBuilder.signWith(SignatureAlgorithm.HS512, secretKey);
+    }
+
+    @Override
+    public JwtBuilder embedSecretMessage(JwtBuilder jwtBuilder) {
+
+        return jwtBuilder.setSubject(Const.SecretMessage);
+    }
+
+    @Override
+    public boolean checkEmbeddedSecretMessage(Claims tokenBody) {
+
+        return tokenBody.getSubject().equals(Const.SecretMessage);
+    }
+
+    @Override
+    public boolean checkTimeStamp(Claims tokenBody) {
+        return true;
+    }
+
+    @Override
+    public boolean checkSessionId(Claims tokenBody) {
+        return true;
+    }
+
+    @Override
+    public Claims extractTokenBodyFromToken(String token) {
+
+        return Jwts.parser().setSigningKey(generateSecretKey()).parseClaimsJws(token).getBody();
+    }
+
+    @Override
+    public String extractSessionIdFromTokenBody(Claims tokenBody) {
+
+        return tokenBody.get("sessionId").toString();
     }
 
 }

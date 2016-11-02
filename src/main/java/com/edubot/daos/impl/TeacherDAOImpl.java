@@ -28,7 +28,7 @@ public class TeacherDAOImpl extends SuperDAO implements TeacherDAO {
     @Override
     public void updateTeacher(Teacher teacher) {
 
-         save(teacher);
+        save(teacher);
     }
 
     @Override

@@ -1,6 +1,8 @@
 package com.edubot.checkpoint;
 
+import com.edubot.facades.SecurityFacade;
 import com.edubot.util.AllowedUrls;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
@@ -9,6 +11,8 @@ import javax.servlet.http.HttpServletResponse;
 
 public class SecurityCheckpoint extends HandlerInterceptorAdapter {
 
+    @Autowired
+    SecurityFacade securityFacade;
 
     //before the actual handler will be executed
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {

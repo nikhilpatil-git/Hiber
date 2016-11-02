@@ -9,8 +9,18 @@ public class Session implements Serializable {
 
     private static final long serialVersionUID = -8243145429438016231L;
 
-    private long fbId, pageId;
+    private String firstName;
+    private long fbId;
+    private long pageId;
     private long timestamp;
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
 
     public long getPageId() {
         return pageId;

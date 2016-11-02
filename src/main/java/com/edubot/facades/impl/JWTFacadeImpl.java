@@ -4,6 +4,8 @@ import com.edubot.checkpoint.Session;
 import com.edubot.converters.RandomConverters;
 import com.edubot.facades.JWTFacade;
 import com.edubot.services.JWTService;
+import com.edubot.util.Const;
+import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.JwtBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -18,14 +20,83 @@ public class JWTFacadeImpl implements JWTFacade {
     JWTService jwtService;
 
     @Override
-    public String generateTokenFromSession(Session session) {
+    public String generateAuthTokenFromSession(Session session) {
 
-        SecretKey secretKey = jwtService.generateSecretKey();
+
+        /*
+         * Create JWT builder from the session
+        */
 
         JwtBuilder jwtBuilder = RandomConverters.SessionToJWTBuilderConverter(session);
 
-        jwtBuilder = jwtService.signWithKey(jwtBuilder, secretKey);
+        /*
+         * Generate secret key for signing the authentication token
+        */
+        SecretKey secretKey = jwtService.generateSecretKey();
 
-        return jwtService.generateJWTToken(jwtBuilder);
+        /*
+         * Sign the token with the secret key
+        */
+        return jwtService.signWithKey(jwtBuilder, secretKey).compact();
+    }
+
+    @Override
+    public Const.SessionStatus authenticateToken(String token) {
+
+        /*
+         * Extract token body from token
+        */
+
+        Claims tokenBody = jwtService.extractTokenBodyFromToken(token);
+
+        /*
+        * Check - 1 check embedded secret message
+        */
+
+        boolean messageStatus = jwtService.checkEmbeddedSecretMessage(tokenBody);
+
+        if(!messageStatus){
+            return Const.SessionStatus.INVALID;
+        }
+
+        /*
+        * Check - 2 check timestamp
+        */
+
+        boolean timestampStatus = jwtService.checkTimeStamp(tokenBody);
+
+        if(!timestampStatus){
+            return Const.SessionStatus.EXPIRED;
+        }
+
+        /*
+        * Check - 3 check session id
+        */
+
+        boolean sessionIdStatus = jwtService.checkSessionId(tokenBody);
+
+
+        if(!sessionIdStatus){
+            return Const.SessionStatus.INVALID;
+        }
+
+
+        return Const.SessionStatus.VALID;
+    }
+
+    @Override
+    public String extractSessionIdFromToken(String token) {
+
+        /*
+         * Extract token body from token.
+        */
+
+        Claims tokenBody = jwtService.extractTokenBodyFromToken(token);
+
+        /*
+         * Extract and return session id from token body.
+        */
+
+        return jwtService.extractSessionIdFromTokenBody(tokenBody);
     }
 }

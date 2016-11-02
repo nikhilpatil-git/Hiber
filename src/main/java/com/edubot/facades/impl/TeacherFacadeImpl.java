@@ -1,7 +1,9 @@
 package com.edubot.facades.impl;
 
+import com.edubot.checkpoint.Session;
 import com.edubot.converters.FacebookSignupFormConverter;
 import com.edubot.entities.person.Teacher;
+import com.edubot.facades.SecurityFacade;
 import com.edubot.facades.TeacherFacade;
 import com.edubot.forms.FacebookSignupForm;
 import com.edubot.services.TeacherService;
@@ -14,6 +16,33 @@ public class TeacherFacadeImpl implements TeacherFacade {
 
     @Autowired
     TeacherService teacherService;
+
+    @Autowired
+    SecurityFacade securityFacade;
+
+    @Override
+    public String registerPersonReturnToken(FacebookSignupForm facebookSignupForm) {
+
+        /*
+         * Convert FacebookSignupForm to teacher and store in the database
+        */
+
+        Teacher teacher = FacebookSignupFormConverter.convertToTeacher(facebookSignupForm);
+
+        teacherService.insertTeacher(teacher);
+
+        /*
+         * Convert FacebookSignupForm to Session
+        */
+
+        Session session = FacebookSignupFormConverter.convertToSession(facebookSignupForm);
+
+        /*
+         * Generate and return the Auth-Token from the created session
+        */
+
+        return securityFacade.generateTokenFromSession(session);
+    }
 
     @Override
     public void registerFacebookDetails(FacebookSignupForm facebookSignupForm) {

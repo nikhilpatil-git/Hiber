@@ -23,6 +23,7 @@ public class FacebookSignupFormConverter {
     public static Session convertToSession(FacebookSignupForm facebookSignupForm){
 
         Session session = new Session();
+        session.setFirstName(facebookSignupForm.getFirstName());
         session.setTimestamp(System.currentTimeMillis());
         session.setFbId(facebookSignupForm.getFacebookId());
         session.setPageId(facebookSignupForm.getBotPageId());
