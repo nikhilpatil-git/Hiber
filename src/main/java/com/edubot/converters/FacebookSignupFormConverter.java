@@ -1,5 +1,6 @@
 package com.edubot.converters;
 
+import com.edubot.checkpoint.Session;
 import com.edubot.entities.person.Teacher;
 import com.edubot.forms.FacebookSignupForm;
 
@@ -17,6 +18,16 @@ public class FacebookSignupFormConverter {
         teacher.setCollegeName(facebookSignupForm.getCollegeName());
 
         return teacher;
+    }
+
+    public static Session convertToSession(FacebookSignupForm facebookSignupForm){
+
+        Session session = new Session();
+        session.setTimestamp(System.currentTimeMillis());
+        session.setFbId(facebookSignupForm.getFacebookId());
+        session.setPageId(facebookSignupForm.getBotPageId());
+
+        return session;
     }
 
 }

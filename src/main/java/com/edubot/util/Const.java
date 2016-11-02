@@ -6,6 +6,8 @@ import java.util.ArrayList;
 
 public class Const {
 
+    public static long PageId = 1L;
+
     public static enum QuestionType{
         MCQ, TF
     }

@@ -17,7 +17,7 @@ import java.util.List;
  */
 public abstract class ControllerHelper {
 
-    public HttpHeaders responseHeaders;
+    private HttpHeaders responseHeaders;
 
     public ControllerHelper(){
 
@@ -100,4 +100,17 @@ public abstract class ControllerHelper {
         return hash;
     }
 
+    public void embedTokenInResponse(String token){
+
+        getResponseHeaders().set("Authorization", token);
+    }
+
+    public HttpHeaders getResponseHeaders() {
+        return responseHeaders;
+    }
+
+    public void setResponseHeaders(HttpHeaders responseHeaders) {
+        this.responseHeaders = responseHeaders;
+    }
 }
+

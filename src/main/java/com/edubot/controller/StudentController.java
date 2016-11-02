@@ -34,7 +34,7 @@ public class StudentController extends ControllerHelper {
 
      //   studentService.sendStudentEmail(getBodyParameter(getRequestBody(request), "email"), courseService.getCourseFromId(cid), (Teacher)request.getAttribute("teacher"));
 
-        return new ResponseEntity<>(0, responseHeaders, HttpStatus.OK);
+        return new ResponseEntity<>(0, getResponseHeaders(), HttpStatus.OK);
     }
 
 }

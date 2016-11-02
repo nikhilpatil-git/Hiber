@@ -1,5 +1,6 @@
 package com.edubot.controller;
 
+import com.edubot.facades.SecurityFacade;
 import com.edubot.facades.TeacherFacade;
 import com.edubot.forms.FacebookSignupForm;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,20 +20,39 @@ public class TeacherController extends ControllerHelper {
     @Autowired
     private TeacherFacade teacherFacade;
 
-    @RequestMapping(value = "/teacher/facebook", method = RequestMethod.POST)
+    @Autowired
+    private SecurityFacade securityFacade;
+
+    @RequestMapping(value = "/teacher/signup1", method = RequestMethod.POST)
     public ResponseEntity<Integer> registerFacebook(@RequestBody FacebookSignupForm facebookSignupForm){
+
+        /**
+         * Generate token from the facebook signup details
+         */
+        String token = securityFacade.createSessionReturnToken(facebookSignupForm);
+
+        /**
+         * Embed generated token in response headers
+         */
+        embedTokenInResponse(token);
+
+        /**
+         * Store the facebook signup details in the database
+         */
 
         teacherFacade.registerFacebookDetails(facebookSignupForm);
 
-        return new ResponseEntity<>(101, responseHeaders, HttpStatus.OK);
+        return new ResponseEntity<>(101, getResponseHeaders(), HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/teacher/email", method = RequestMethod.POST)
+    @RequestMapping(value = "/teacher/signup2", method = RequestMethod.POST)
     public ResponseEntity<Integer> registerEmail(@RequestParam("email") String email){
+
+        System.out.println("I am Second");
 
         teacherFacade.registerEmail(email);
 
-        return new ResponseEntity<>(101, responseHeaders, HttpStatus.OK);
+        return new ResponseEntity<>(101, getResponseHeaders(), HttpStatus.OK);
     }
 
 /*    @RequestMapping(value = "/teacher/signin", method = RequestMethod.POST)

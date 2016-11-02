@@ -13,6 +13,8 @@ public class FacebookSignupForm implements Serializable {
     private String lastName;
     private String gender;
     private String collegeName;
+    private long facebookId;
+    private long botPageId;
 
     public String getFirstName() {
         return firstName;
@@ -28,5 +30,13 @@ public class FacebookSignupForm implements Serializable {
 
     public String getCollegeName() {
         return collegeName;
+    }
+
+    public long getFacebookId() {
+        return facebookId;
+    }
+
+    public long getBotPageId() {
+        return botPageId;
     }
 }
