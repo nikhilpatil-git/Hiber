@@ -55,4 +55,10 @@ public class SecurityFacadeImpl implements SecurityFacade {
         }
 
     }
+
+    @Override
+    public Session generateSessionFromSessionId(long sessionId) {
+
+        return redisFacade.loadUserSession(sessionId);
+    }
 }

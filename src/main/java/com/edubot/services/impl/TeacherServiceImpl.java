@@ -21,8 +21,7 @@ public class TeacherServiceImpl implements TeacherService {
 
     @Override
     public void insertEmail(String email, long id) {
-
-
+       teacherDAO.insertEmail(email, id);
     }
 
     @Override

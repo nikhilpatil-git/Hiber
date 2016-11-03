@@ -30,6 +30,10 @@
 
         <property name="emailVerify" type="java.lang.Boolean" column="email_verify"/>
 
+        <property name="facebookId" type="java.lang.Long" column="facebook_id"/>
+
+        <property name="botPageId" type="java.lang.Long" column="bot_page_id"/>
+
         <subclass name="com.edubot.entities.person.Teacher" discriminator-value="TEACHER">
             <set name="courses" table="course"
                  inverse="true" lazy="true" fetch="select">
@@ -49,8 +53,6 @@
 
             <join table="student">
                 <key column="student_id"/>
-                <property name="facebookId" type="java.lang.Long" column="facebook_id"/>
-                <property name="pageId" type="java.lang.Long" column="page_id"/>
             </join>
 
         </subclass>

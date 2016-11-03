@@ -13,4 +13,5 @@ public interface SecurityFacade {
 
     public void authenticateTokenAddAttribute(String token, HttpServletRequest httpServletRequest);
 
+    public Session generateSessionFromSessionId(long sessionId);
 }

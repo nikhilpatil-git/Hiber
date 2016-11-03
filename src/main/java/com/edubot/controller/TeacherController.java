@@ -44,7 +44,7 @@ public class TeacherController extends ControllerHelper {
 
         System.out.println("Second Attribute "+request.getAttribute("SessionId"));
 
-        teacherFacade.registerEmail(email);
+        teacherFacade.registerEmail(getSession(request), email);
 
         return new ResponseEntity<>(101, getResponseHeaders(), HttpStatus.OK);
     }

@@ -16,6 +16,8 @@ public class FacebookSignupFormConverter {
         teacher.setLastName(facebookSignupForm.getLastName());
         teacher.setGender(facebookSignupForm.getGender());
         teacher.setCollegeName(facebookSignupForm.getCollegeName());
+        teacher.setFacebookId(facebookSignupForm.getFacebookId());
+        teacher.setBotPageId(facebookSignupForm.getBotPageId());
 
         return teacher;
     }

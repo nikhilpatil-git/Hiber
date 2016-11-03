@@ -12,6 +12,9 @@ public class Person implements java.io.Serializable {
     private String collegeName;
     private boolean emailVerify;
     private String gender;
+    private long facebookId;
+    private long botPageId;
+
 
     public Person() {
     }
@@ -71,4 +74,22 @@ public class Person implements java.io.Serializable {
     public void setGender(String gender) {
         this.gender = gender;
     }
+
+    public long getFacebookId() {
+        return facebookId;
+    }
+
+    public void setFacebookId(long facebookId) {
+        this.facebookId = facebookId;
+    }
+
+
+    public long getBotPageId() {
+        return botPageId;
+    }
+
+    public void setBotPageId(long botPageId) {
+        this.botPageId = botPageId;
+    }
+
 }

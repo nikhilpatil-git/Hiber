@@ -53,8 +53,9 @@ public class TeacherFacadeImpl implements TeacherFacade {
     }
 
     @Override
-    public void registerEmail(String email) {
+    public void registerEmail(Session session, String email) {
 
+        teacherService.insertEmail(email, session.getFbId());
         System.out.println(email);
     }
 }

@@ -10,8 +10,8 @@ public class TeacherDAOImpl extends SuperDAO implements TeacherDAO {
     private final String GET_TEACHER_FROM_EMAIL = "from Teacher where email = '%s'";
     private final String DELETE_TEACHER_FROM_ID = "delete from Teacher where teacher_id = %d";
     private final String UPDATE_TEACHER_ALIAS = "update Teacher set alias = '%s' where teacher_id = %d";
-    private final String UPDATE_EMAIL_VERIFY_STATUS = "update Person set email_verify = %b where person_id = %d";
-    private final String UPDATE_EMAIL = "update Person set email = '%s' where person_id = %d";
+    private final String UPDATE_EMAIL_VERIFY_STATUS = "update Person set email_verify = %b where facebook_id = %d";
+    private final String UPDATE_EMAIL = "update Person set email = '%s' where facebook_id = %d";
 
     @Override
     public void insertTeacher(Teacher teacher) {
@@ -22,7 +22,7 @@ public class TeacherDAOImpl extends SuperDAO implements TeacherDAO {
     @Override
     public void insertEmail(String email, long id) {
 
-
+        updateSingletonEntity(String.format(UPDATE_EMAIL, email, id));
     }
 
     @Override

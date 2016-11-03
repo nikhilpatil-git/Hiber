@@ -1,5 +1,6 @@
 package com.edubot.controller;
 
+import com.edubot.checkpoint.Session;
 import com.edubot.facades.SecurityFacade;
 import com.edubot.util.Const;
 import org.json.JSONArray;
@@ -30,6 +31,13 @@ public abstract class ControllerHelper {
         responseHeaders.setAccessControlExposeHeaders(Const.AllowedHeaders);
         responseHeaders.setLocation(URI.create(Const.ClientUris.CLIENT_SIGN_UP));
 
+    }
+
+    public Session getSession(HttpServletRequest request){
+
+        String sessionId = request.getAttribute("SessionId").toString();
+
+        return securityFacade.generateSessionFromSessionId(Long.parseLong(sessionId));
     }
     
     public String getRequestBody(HttpServletRequest request) {

@@ -1,3 +1,4 @@
+/*
 package com.edubot.test_methods;
 
 import com.edubot.config.TeacherBean;
@@ -24,9 +25,11 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
 
+*/
 /**
  * Created by deadcode on 25/10/2016.
- */
+ *//*
+
 public class SaveTest {
 
     private Session session;
@@ -48,12 +51,14 @@ public class SaveTest {
 //            teacherDAO.insertTeacher(teacher);
 
 
+*/
 /*            Course course = saveCourse(saveTeacher());
             Assignment assignment = saveAssignment(course);
             Student student = saveStudent(course);
 
             showMeQuestions();
-            showMeStoryLines();*/
+            showMeStoryLines();*//*
+
 
             // AbstractQuestion question = saveQuestion(assignment);
 
@@ -167,7 +172,7 @@ public class SaveTest {
         student.setLastName("Shenoda");
         student.setCollegeName("Trinity");
         student.setFacebookId(191923929922L);
-        student.setPageId(9390390393939L);
+        student.setBotPageId(9390390393939L);
         student.setEmail("student202@gmail.com");
         session.save(student);
 
@@ -176,7 +181,7 @@ public class SaveTest {
         student.setLastName("Shenoda");
         student2.setCollegeName("DIT");
         student2.setFacebookId(191923929922L);
-        student2.setPageId(9390390393939L);
+        student2.setBotPageId(9390390393939L);
         student2.setEmail("studdjdjd02@gmail.com");
         session.save(student2);
 
@@ -204,11 +209,13 @@ public class SaveTest {
         question.setAssignment(assignment);
         session.save(question);
 
+*/
 /*        TrueFalseQuestion trueFalseQuestion = new TrueFalseQuestion();
         trueFalseQuestion.setText("what is a physics");
         trueFalseQuestion.setHint("who is issac newton");
         trueFalseQuestion.setRightAnswer(1);
-        session.save(trueFalseQuestion);*/
+        session.save(trueFalseQuestion);*//*
+
 
         MessageStoryLine messageStoryLine = new MessageStoryLine();
         messageStoryLine.setText("All is good man");
@@ -280,3 +287,4 @@ public class SaveTest {
 
 
 }
+*/
