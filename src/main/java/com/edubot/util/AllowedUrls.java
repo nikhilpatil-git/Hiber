@@ -11,7 +11,6 @@ public class AllowedUrls {
 
     static {
         urls.add("/teacher/signup1");
-        urls.add("/teacher/signup2");
     }
 
     public static boolean check(String url){

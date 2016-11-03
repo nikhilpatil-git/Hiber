@@ -1,5 +1,6 @@
 package com.edubot.services.impl;
 
+import com.edubot.checkpoint.Session;
 import com.edubot.services.JWTService;
 import com.edubot.util.Const;
 import io.jsonwebtoken.Claims;
@@ -96,7 +97,7 @@ public class JWTServiceImpl implements JWTService {
     @Override
     public String extractSessionIdFromTokenBody(Claims tokenBody) {
 
-        return tokenBody.get("sessionId").toString();
+        return tokenBody.get(Session.SessionIdentifier).toString();
     }
 
 }

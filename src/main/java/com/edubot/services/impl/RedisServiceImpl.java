@@ -14,17 +14,15 @@ public class RedisServiceImpl implements RedisService {
     RedisTemplate redisTemplate;
 
     @Override
-    public boolean storeSession(Session session) {
+    public void storeSession(Session session) {
 
-        redisTemplate.opsForHash().put(session.getFirstName(), session.getFbId(), session);
-
-        return (loadSession(session.getFbId())) != null ? true : false;
+        redisTemplate.opsForHash().put(Session.SessionIdentifier, session.getSessionId(), session);
     }
 
     @Override
-    public Session loadSession(long senderId) {
+    public Session loadSession(long sessionId) {
 
-        Session session = (Session) redisTemplate.opsForHash().get("Session", senderId);
+        Session session = (Session) redisTemplate.opsForHash().get(Session.SessionIdentifier, sessionId);
 
         return session;
     }

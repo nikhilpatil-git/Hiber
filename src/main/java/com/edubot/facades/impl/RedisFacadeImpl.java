@@ -25,8 +25,8 @@ public class RedisFacadeImpl implements RedisFacade {
     }
 
     @Override
-    public boolean storeSession(Session session) {
+    public void storeSession(Session session) {
 
-        return redisService.storeSession(session);
+        redisService.storeSession(session);
     }
 }

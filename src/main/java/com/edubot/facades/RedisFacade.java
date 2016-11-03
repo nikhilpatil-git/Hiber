@@ -33,5 +33,5 @@ public interface RedisFacade {
      *
      * @param session
      */
-    public boolean storeSession(Session session);
+    public void storeSession(Session session);
 }

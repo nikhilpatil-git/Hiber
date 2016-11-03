@@ -34,6 +34,8 @@ public class JWTFacadeImpl implements JWTFacade {
         */
         SecretKey secretKey = jwtService.generateSecretKey();
 
+        jwtBuilder = jwtService.embedSecretMessage(jwtBuilder);
+
         /*
          * Sign the token with the secret key
         */

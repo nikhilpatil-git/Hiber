@@ -5,7 +5,10 @@ import com.edubot.facades.JWTFacade;
 import com.edubot.facades.RedisFacade;
 import com.edubot.facades.SecurityFacade;
 import com.edubot.services.impl.SecurityService;
+import com.edubot.util.Const;
 import org.springframework.beans.factory.annotation.Autowired;
+
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * Created by deadcode on 01/11/2016.
@@ -38,9 +41,18 @@ public class SecurityFacadeImpl implements SecurityFacade {
     }
 
     @Override
-    public String authenticateTokenReturnSessionId(String token) {
+    public void authenticateTokenAddAttribute(String token, HttpServletRequest httpServletRequest) {
 
+        Const.SessionStatus sessionStatus = jwtFacade.authenticateToken(token);
 
-        return null;
+        httpServletRequest.setAttribute("SessionStatus", sessionStatus.name());
+
+        if(sessionStatus == Const.SessionStatus.VALID){
+
+            String sessionId = jwtFacade.extractSessionIdFromToken(token);
+
+            httpServletRequest.setAttribute("SessionId", sessionId);
+        }
+
     }
 }

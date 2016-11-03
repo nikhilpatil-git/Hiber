@@ -21,8 +21,9 @@ public class SecurityCheckpoint extends HandlerInterceptorAdapter {
 
          if((authToken = request.getHeader("Authorization")) != null){
 
+             securityFacade.authenticateTokenAddAttribute(authToken, request);
 
-
+             return true;
         }
          else if(AllowedUrls.check(request.getRequestURI())){
 

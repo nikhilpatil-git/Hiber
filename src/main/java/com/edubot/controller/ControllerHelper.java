@@ -1,8 +1,10 @@
 package com.edubot.controller;
 
+import com.edubot.facades.SecurityFacade;
 import com.edubot.util.Const;
 import org.json.JSONArray;
 import org.json.JSONObject;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 
 import javax.servlet.http.HttpServletRequest;
@@ -18,6 +20,9 @@ import java.util.List;
 public abstract class ControllerHelper {
 
     private HttpHeaders responseHeaders;
+
+    @Autowired
+    private SecurityFacade securityFacade;
 
     public ControllerHelper(){
 
@@ -39,6 +44,7 @@ public abstract class ControllerHelper {
 
         return jb.toString();
     }
+
 
     public JSONObject getRequestBodyJsonObject(String body){
 

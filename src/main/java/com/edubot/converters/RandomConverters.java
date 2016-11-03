@@ -12,9 +12,8 @@ public class RandomConverters {
     public static JwtBuilder SessionToJWTBuilderConverter(Session session){
 
         JwtBuilder builder =  Jwts.builder();
-        builder.claim("facebook_id", session.getFbId());
+        builder.claim(Session.SessionIdentifier, session.getSessionId());
         builder.claim("timestamp", session.getTimestamp());
-        builder.claim("bot_page_id", session.getPageId());
 
         return builder;
     }

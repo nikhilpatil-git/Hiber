@@ -7,7 +7,7 @@ import com.edubot.checkpoint.Session;
  */
 public interface RedisService {
 
-    public boolean storeSession(Session session);
+    public void storeSession(Session session);
 
     public Session loadSession(long senderId);
 

@@ -1,12 +1,13 @@
 package com.edubot.controller;
 
-import com.edubot.facades.SecurityFacade;
 import com.edubot.facades.TeacherFacade;
 import com.edubot.forms.FacebookSignupForm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import javax.servlet.http.HttpServletRequest;
 
 /*
     **** Operations ***
@@ -19,9 +20,6 @@ public class TeacherController extends ControllerHelper {
 
     @Autowired
     private TeacherFacade teacherFacade;
-
-    @Autowired
-    private SecurityFacade securityFacade;
 
     @RequestMapping(value = "/teacher/signup1", method = RequestMethod.POST)
     public ResponseEntity<Integer> registerFacebook(@RequestBody FacebookSignupForm facebookSignupForm){
@@ -40,9 +38,11 @@ public class TeacherController extends ControllerHelper {
     }
 
     @RequestMapping(value = "/teacher/signup2", method = RequestMethod.POST)
-    public ResponseEntity<Integer> registerEmail(@RequestParam("email") String email){
+    public ResponseEntity<Integer> registerEmail(HttpServletRequest request, @RequestParam("email") String email){
 
-        System.out.println("I am Second");
+        System.out.println("First Attribute "+request.getAttribute("SessionStatus"));
+
+        System.out.println("Second Attribute "+request.getAttribute("SessionId"));
 
         teacherFacade.registerEmail(email);
 
