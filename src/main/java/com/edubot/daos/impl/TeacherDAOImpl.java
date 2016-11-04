@@ -12,6 +12,8 @@ public class TeacherDAOImpl extends SuperDAO implements TeacherDAO {
     private final String UPDATE_TEACHER_ALIAS = "update Teacher set alias = '%s' where teacher_id = %d";
     private final String UPDATE_EMAIL_VERIFY_STATUS = "update Person set email_verify = %b where facebook_id = %d";
     private final String UPDATE_EMAIL = "update Person set email = '%s' where facebook_id = %d";
+    private final String UPDATE_COLLEGE_NAME = "update Person set college_name = '%s' where facebook_id = %d";
+
 
     @Override
     public void insertTeacher(Teacher teacher) {
@@ -23,6 +25,12 @@ public class TeacherDAOImpl extends SuperDAO implements TeacherDAO {
     public void insertEmail(String email, long id) {
 
         updateSingletonEntity(String.format(UPDATE_EMAIL, email, id));
+    }
+
+    @Override
+    public void insertCollegeName(String collegeName, long id) {
+
+        updateSingletonEntity(String.format(UPDATE_COLLEGE_NAME, collegeName, id));
     }
 
     @Override

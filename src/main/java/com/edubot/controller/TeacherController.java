@@ -2,6 +2,7 @@ package com.edubot.controller;
 
 import com.edubot.facades.TeacherFacade;
 import com.edubot.forms.FacebookSignupForm;
+import com.edubot.forms.InstituteDetailForm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,7 +23,7 @@ public class TeacherController extends ControllerHelper {
     private TeacherFacade teacherFacade;
 
     @RequestMapping(value = "/teacher/signup1", method = RequestMethod.POST)
-    public ResponseEntity<Integer> registerFacebook(@RequestBody FacebookSignupForm facebookSignupForm){
+    public ResponseEntity<Integer> registerFacebookDetails(@RequestBody FacebookSignupForm facebookSignupForm){
 
         /**
          * Generate token from the facebook signup details
@@ -38,13 +39,9 @@ public class TeacherController extends ControllerHelper {
     }
 
     @RequestMapping(value = "/teacher/signup2", method = RequestMethod.POST)
-    public ResponseEntity<Integer> registerEmail(HttpServletRequest request, @RequestParam("email") String email){
+    public ResponseEntity<Integer> registerInstituteDetails(HttpServletRequest request, @RequestBody InstituteDetailForm instituteDetailForm){
 
-        System.out.println("First Attribute "+request.getAttribute("SessionStatus"));
-
-        System.out.println("Second Attribute "+request.getAttribute("SessionId"));
-
-        teacherFacade.registerEmail(getSession(request), email);
+        teacherFacade.registerInstituteDetail(getSession(request), instituteDetailForm);
 
         return new ResponseEntity<>(101, getResponseHeaders(), HttpStatus.OK);
     }

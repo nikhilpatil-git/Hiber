@@ -24,7 +24,6 @@ public class StudentController extends ControllerHelper {
         return 0;
     }
 
-
     @RequestMapping(value = "/student/course/{cid}", method = RequestMethod.POST)
     public ResponseEntity<Integer> inviteStudent(HttpServletRequest request, @PathVariable("cid") long cid){
 

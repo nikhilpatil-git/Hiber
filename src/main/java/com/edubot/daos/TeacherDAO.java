@@ -10,6 +10,8 @@ public interface TeacherDAO {
 
     void insertEmail(String email, long id);
 
+    void insertCollegeName(String collegeName, long id);
+
     void updateTeacher(Teacher teacher);
 
     void updateTeacherAlias(String alias, long id);

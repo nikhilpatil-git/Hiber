@@ -6,6 +6,7 @@ import com.edubot.entities.person.Teacher;
 import com.edubot.facades.SecurityFacade;
 import com.edubot.facades.TeacherFacade;
 import com.edubot.forms.FacebookSignupForm;
+import com.edubot.forms.InstituteDetailForm;
 import com.edubot.services.TeacherService;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -53,9 +54,9 @@ public class TeacherFacadeImpl implements TeacherFacade {
     }
 
     @Override
-    public void registerEmail(Session session, String email) {
+    public void registerInstituteDetail(Session session, InstituteDetailForm instituteDetailForm) {
 
-        teacherService.insertEmail(email, session.getFbId());
-        System.out.println(email);
+        teacherService.insertInstituteDetails(instituteDetailForm, session.getFbId());
+
     }
 }

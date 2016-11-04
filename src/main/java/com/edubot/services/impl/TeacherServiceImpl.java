@@ -2,6 +2,7 @@ package com.edubot.services.impl;
 
 import com.edubot.daos.TeacherDAO;
 import com.edubot.entities.person.Teacher;
+import com.edubot.forms.InstituteDetailForm;
 import com.edubot.services.TeacherService;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -20,8 +21,10 @@ public class TeacherServiceImpl implements TeacherService {
     }
 
     @Override
-    public void insertEmail(String email, long id) {
-       teacherDAO.insertEmail(email, id);
+    public void insertInstituteDetails(InstituteDetailForm instituteDetailForm, long id) {
+
+        teacherDAO.insertEmail(instituteDetailForm.getEmail(), id);
+        teacherDAO.insertCollegeName(instituteDetailForm.getCollegeName(), id);
     }
 
     @Override

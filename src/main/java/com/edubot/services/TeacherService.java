@@ -1,12 +1,13 @@
 package com.edubot.services;
 
 import com.edubot.entities.person.Teacher;
+import com.edubot.forms.InstituteDetailForm;
 
 public interface TeacherService {
 
     void insertTeacher(Teacher teacher);
 
-    void insertEmail(String email, long id);
+    void insertInstituteDetails(InstituteDetailForm instituteDetailForm, long id);
 
     void updateTeacher(Teacher teacher);
 
