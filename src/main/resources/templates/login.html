@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html ng-app="Login">
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <link rel="stylesheet" href="../../css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="../../css/fb.css"/>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js" ></script>
+    <script src="../../js/bootstrap.min.js"></script>
+    <script src="../../js/login.js"></script>
+    <title></title>
+</head>
+<body>
+
+<div class="row">
+
+    <div class="col-md-6 col-md-offset-1">
+        <h1><span class="label label-default">Please Signup with facebook to enter the class</span></h1>
+    </div>
+
+</div>
+
+<div class="row">
+    <div class="col-md-6 col-md-offset-4 fb_button" ng-controller="LoginCntrl as login">
+        <button ng-click="login.login()" id="login" class="fb_button_style"></button>
+    </div>
+</div>
+
+<div class="row label">
+    <div id="status" class="col-md-6 col-md-offset-4">
+        You are not logged into Facebook.
+    </div>
+</div>
+
+
+</body>
+</html>

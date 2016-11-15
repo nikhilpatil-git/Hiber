@@ -18,6 +18,14 @@ public class StudentController extends ControllerHelper {
     */
     //@PathVariable("sid") long sid,
 
+    @RequestMapping(value = "/test", method = RequestMethod.POST)
+    public int addStudent(HttpServletRequest request){
+
+        System.out.println(getRequestBody(request));
+
+        return 0;
+    }
+
     @RequestMapping(value = "/student/confirm/{token}", method = RequestMethod.POST)
     public int addStudent(@RequestBody Student student, HttpServletRequest request){
 
